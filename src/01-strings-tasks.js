@@ -223,8 +223,24 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const newStr = str.replace(/[a-zA-Z]/g, (letter) => {
+    const charCode = letter.charCodeAt(0);
+    if (
+      (charCode >= 97 && charCode <= 109)
+      || (charCode >= 65 && charCode <= 77)
+    ) {
+      return String.fromCharCode(charCode + 13);
+    }
+    if (
+      (charCode >= 110 && charCode <= 122)
+      || (charCode >= 78 && charCode <= 90)
+    ) {
+      return String.fromCharCode(charCode - 13);
+    }
+    return newStr;
+  });
+  return newStr;
 }
 
 /**
